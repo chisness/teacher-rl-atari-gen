@@ -1,7 +1,7 @@
 import math
 from multiprocessing import Pool
 import numpy as np
-import gym.spaces.prng as space_prng
+#import gym.spaces.prng as space_prng
 
 from rl_teacher.utils import get_timesteps_per_episode
 
@@ -95,7 +95,8 @@ def basic_segments_from_rand_rollout(
     segments = []
     env = make_env(env_id)
     env.seed(seed)
-    space_prng.seed(seed)
+    #space_prng.seed(seed)
+    np.random.seed(seed)
     segment_length = int(clip_length_in_seconds * env.fps)
     while len(segments) < n_desired_segments:
         path = do_rollout(env, random_action, stacked_frames)

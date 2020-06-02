@@ -108,7 +108,8 @@ class OrdinalRewardModel(RewardModel):
             self.obs_shape = self.obs_shape + (stacked_frames,)
         self.discrete_action_space = not hasattr(env.action_space, "shape")
         self.act_shape = (env.action_space.n,) if self.discrete_action_space else env.action_space.shape
-
+        print('obs shape1', self.obs_shape)
+        print('act shape1', self.act_shape)
         self.graph = self._build_model()
         self.sess.run(tf.global_variables_initializer())
         my_vars = tf.global_variables()
@@ -132,6 +133,8 @@ class OrdinalRewardModel(RewardModel):
             # Assume the actions are how we want them
             segment_act = self.act_placeholder
             # In simple environments, default to a basic Multi-layer Perceptron (see TODO above)
+            print('obs shape', self.obs_shape)
+            print('act shape', self.act_shape)
             net = FullyConnectedMLP(self.obs_shape, self.act_shape)
 
         # Our neural network maps a (state, action) pair to a reward
